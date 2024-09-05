@@ -164,3 +164,5 @@ cython_debug/
 raw_data/20news-18828/
 raw_data/blogs/
 raw_data/
+bac.parquet
+bac_train.parquet
