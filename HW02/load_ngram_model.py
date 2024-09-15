@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from collections import Counter, defaultdict
 import json
 
-def load_ngram_model(model_name: str) -> tuple:
+def load_ngram_model(model_name: str) -> tuple[Counter[int], defaultdict[int]]:
     """
     Carga un modelo de n-gramas desde un archivo JSON y lo devuelve junto con el conteo de unigramas.
 
@@ -23,6 +24,10 @@ def load_ngram_model(model_name: str) -> tuple:
         # Se espera que los modelos estén en el formato {ngram_counts: {...}, final_unigram: {...}}
         ngram_counts = model_data.get('ngram_counts', {})
         final_unigram = model_data.get('final_unigram', {})
+
+        # Convertir a tuplas de strings nuevamente
+        ngram_counts = {tuple(key.split()): value for key, value in ngram_counts.items()}
+        final_unigram = {tuple(key.split()): value for key, value in final_unigram.items()}
         
         return ngram_counts, final_unigram
     
