@@ -1,8 +1,8 @@
 from re import compile
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import FunctionTransformer
-from sklearn.decomposition import TruncatedSVD
+from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler
+from pandas import DataFrame, concat
 
 
 
@@ -61,7 +61,6 @@ def clean_text(txt: str) -> str:
 
     # Compila las expresiones regulares fuera de la función para mejorar la eficiencia
     email_re = compile(r'\S*@\S*\s?|from: |re: |subject: |urllink|maxaxaxaxaxaxaxaxaxaxaxaxaxaxax')
-    punctuation_re = compile(r'[?!:]')
     non_alphanumeric_re = compile(r'[^A-Za-z0-9 \n]')
     numbers_re = compile(r'\b\d{1,3}(,\d{3})*(\.\d+)?\b')
     single_newline_re = compile(r'\n')
@@ -93,52 +92,122 @@ def clean_text(txt: str) -> str:
     return txt.strip()
 
 
-def build_pipeline(vectorizer_type: str = 'count', max_features: int = 20000, dim: int = None) -> Pipeline:
+def build_preprocess_pipeline(vectorizer_type: str = 'count', max_features: int = 15000) -> Pipeline:
     """
-    Construye un pipeline de scikit-learn para el procesamiento y transformación de textos.
+    Construye un pipeline de procesamiento y vectorización de texto utilizando scikit-learn.
 
     El pipeline incluye:
-    - Limpieza de texto con `clean_text`.
-    - Vectorización del texto utilizando `CountVectorizer` o `TfidfVectorizer`.
-    - Opcionalmente, reducción de dimensionalidad con `TruncatedSVD`.
+    - Limpieza de texto usando `clean_text` para normalizar los datos.
+    - Vectorización del texto utilizando `CountVectorizer` o `TfidfVectorizer` para convertir el texto en una matriz de características.
+    - Si se selecciona 'count' como vectorizador, se aplicará `MaxAbsScaler` para escalar las características, manteniendo las matrices dispersas.
 
     Args:
-        vectorizer_type (str, optional): Tipo de vectorizador a utilizar. Puede ser 'count' para `CountVectorizer` o 'tfidf' para `TfidfVectorizer`. Por defecto es 'count'.
-        max_features (int, optional): Número máximo de características a considerar en el vectorizador. Por defecto es 20000.
-        dim (int, optional): Número de componentes para `TruncatedSVD` si se aplica reducción de dimensionalidad. Si es `None`, no se aplica reducción de dimensionalidad. Por defecto es `None`.
+        vectorizer_type (str, optional): Tipo de vectorizador a utilizar. 
+            Puede ser 'count' para `CountVectorizer` o 'tfidf' para `TfidfVectorizer`. 
+            El valor predeterminado es 'count'.
+        max_features (int, optional): Número máximo de características que se utilizarán 
+            en el vectorizador. Este parámetro controla la dimensionalidad del espacio 
+            de características. El valor predeterminado es 15000.
 
     Raises:
         ValueError: Si `vectorizer_type` no es 'count' ni 'tfidf'.
 
     Returns:
-        Pipeline: Objeto `Pipeline` de scikit-learn listo para transformar datos de texto.
+        Pipeline: Un pipeline de scikit-learn listo para preprocesar y vectorizar 
+        datos de texto.
     """
     # Selección del vectorizador según el tipo especificado
     if vectorizer_type == 'count':
         vectorizer = CountVectorizer(
-            max_features=max_features,
-            stop_words='english',
-            ngram_range=(1, 2)
+            max_features=max_features,      # Limita el número de características
+            stop_words='english',           # Elimina las palabras vacías (stopwords) en inglés
+            ngram_range=(1, 2)              # Incluye unigrams y bigrams
         )
     elif vectorizer_type == 'tfidf':
         vectorizer = TfidfVectorizer(
-            max_features=max_features,
-            stop_words='english',
-            ngram_range=(1, 2)
+            max_features=max_features,      # Limita el número de características
+            stop_words='english',           # Elimina las palabras vacías (stopwords) en inglés
+            ngram_range=(1, 2)              # Incluye unigrams y bigrams
         )
     else:
+        # Si el tipo de vectorizador no es válido, se lanza un error
         raise ValueError("El parámetro 'vectorizer_type' debe ser 'count' o 'tfidf'.")
 
     # Definición de los pasos del pipeline
     steps = [
+        # Limpieza de texto utilizando una función personalizada
         ('clean_text', FunctionTransformer(lambda x: [clean_text(text) for text in x], validate=False)),
+        # Vectorización del texto con el vectorizador seleccionado
         ('vectorizer', vectorizer),
     ]
+    
+    # Añadir escalado si se utiliza CountVectorizer (las matrices dispersas pueden beneficiarse del escalado)
+    if vectorizer_type == 'count':
+        steps.append(('scaler', MaxAbsScaler()))  # Escala las características al rango [-1, 1]
 
-    # Agregar reducción de dimensionalidad si 'dim' está definido
-    if dim is not None:
-        steps.append(('reduce_dim', TruncatedSVD(n_components=dim, random_state=42)))
-
-    # Construcción del pipeline
+    # Construcción y retorno del pipeline
     pipeline = Pipeline(steps)
     return pipeline
+
+
+
+
+def create_sentiment_dataset(files: list[str]) -> DataFrame:
+    """
+    Crea un dataset de texto y etiquetas a partir de una lista de archivos.
+
+    Esta función lee múltiples archivos de texto, extrae etiquetas de sentimiento
+    (basadas en un patrón específico) y realiza preprocesamiento del texto, como 
+    la eliminación de patrones no deseados. El resultado es un DataFrame que contiene 
+    el texto preprocesado, las etiquetas y la información sobre la fuente de los archivos.
+
+    Args:
+        files (list[str]): Lista de rutas a los archivos de texto que contienen los datos.
+
+    Returns:
+        DataFrame: Un DataFrame que contiene las siguientes columnas:
+            - 'raw_text': El texto original leído del archivo.
+            - 'label': La etiqueta de sentimiento extraída del texto.
+            - 'text': El texto preprocesado donde se eliminan ciertos patrones.
+            - 'folder': El nombre de la carpeta de origen del archivo.
+            - 'file': El nombre del archivo de origen.
+    """
+
+    # Compilar las expresiones regulares para extraer las etiquetas y limpiar el texto
+    label_match = compile(r'#label#:(.*)')  # Patrón para extraer la etiqueta de sentimiento
+    combined_pattern = compile(r'#label#:(.*)|:\d+|_')  # Patrón para limpiar el texto
+
+    # Lista para acumular los DataFrames resultantes de cada archivo
+    dfs = []
+    
+    # Iterar sobre cada archivo en la lista de archivos proporcionados
+    for path in files:
+        # Leer el contenido del archivo y dividirlo en líneas de texto
+        data = read_file(path).split('\n')
+        
+        # Extraer el nombre de la carpeta y del archivo a partir de la ruta
+        folder, file = path.split('/')[-2:]
+
+        # Crear un DataFrame a partir del texto leído
+        df = DataFrame({'raw_text': data})
+        
+        # Filtrar las filas donde el texto tiene al menos 5 caracteres
+        df = df[df['raw_text'].str.len() > 5]
+
+        # Extraer la etiqueta de sentimiento usando la expresión regular (vectorizado)
+        df['label'] = df['raw_text'].str.extract(label_match, expand=False)
+
+        # Limpiar el texto eliminando patrones no deseados (vectorizado)
+        df['text'] = df['raw_text'].str.replace(combined_pattern, ' ', regex=True)
+
+        # Añadir las columnas de información de la carpeta y archivo de origen
+        df['folder'] = folder
+        df['file'] = file
+        
+        # Agregar el DataFrame a la lista de DataFrames
+        dfs.append(df)
+    
+    # Concatenar todos los DataFrames acumulados en uno solo y reiniciar el índice
+    df_final = concat(dfs).reset_index(drop=True)
+    
+    return df_final
