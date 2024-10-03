@@ -186,7 +186,7 @@ def create_sentiment_dataset(files: list[str]) -> DataFrame:
         data = read_file(path).split('\n')
         
         # Extraer el nombre de la carpeta y del archivo a partir de la ruta
-        folder, file = path.split('/')[-2:]
+        folder, file = path.replace('\\', '/').split('/')[-2:]
 
         # Crear un DataFrame a partir del texto leído
         df = DataFrame({'raw_text': data})
