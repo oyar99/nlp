@@ -34,5 +34,5 @@ Activar el ambiente virtual
 Instalar las librerias requeridas
 
 ```sh
-pip install -r src/requirements.txt
+pip install -r requirements.txt
 ```

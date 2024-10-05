@@ -211,3 +211,32 @@ def create_sentiment_dataset(files: list[str]) -> DataFrame:
     df_final = concat(dfs).reset_index(drop=True)
     
     return df_final
+
+def load_lexicon(path: str) -> dict:
+    """
+    Carga un lexicon para analisis de sentimientos y devuelve un diccionario
+    donde cada llave corresponde a un termino del lexicon y el valor a una tupla
+    con el score positivo y negativo indicando si es un termino que se usa en un
+    contexto de una resena buena o mala respectivamente
+
+    Args:
+        path: str: La ruta donde esta almacenada el lexicon de SentiWordNet
+
+    Returns:
+        dict: Un diccionario con los puntajes positivo/negativo de cada termino
+    """
+    sentiwordnet_dict = {}
+    with open(path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if not line.startswith('#'):
+                parts = line.split('\t')
+                pos_score = float(parts[2]) # Score positivo
+                neg_score = float(parts[3]) # Score negativo
+                synset_terms = parts[4].split()  # Terminos
+                
+                # Almacenar la puntuacion de cada termino en el diccionario
+                for term in synset_terms:
+                    sentiwordnet_dict[term] = (pos_score, neg_score)
+
+    return sentiwordnet_dict
+
