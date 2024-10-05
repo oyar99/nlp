@@ -1,7 +1,7 @@
 from re import compile
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler
+from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler, MinMaxScaler
 from pandas import DataFrame, concat
 
 
@@ -150,8 +150,6 @@ def build_preprocess_pipeline(vectorizer_type: str = 'count', max_features: int 
     return pipeline
 
 
-
-
 def create_sentiment_dataset(files: list[str]) -> DataFrame:
     """
     Crea un dataset de texto y etiquetas a partir de una lista de archivos.
@@ -212,6 +210,50 @@ def create_sentiment_dataset(files: list[str]) -> DataFrame:
     
     return df_final
 
+def sentiment_score(text: str, lexicon: dict):
+    """
+    Calcula la puntuación de sentimiento de un texto
+
+    Args:
+        text: El texto de entrada
+    """
+    tokens = text.split(' ')
+    score = 0
+    for token in tokens:
+        if token in lexicon:
+            pos_score, neg_score = lexicon[token]
+            score += pos_score - neg_score
+    return score
+
+def build_preprocess_pipeline_lexicon(path: str) -> Pipeline:
+    """
+    Construye un pipeline de procesamiento y vectorización de texto utilizando scikit-learn.
+
+    El pipeline incluye:
+    - Limpieza de texto usando `clean_text` para normalizar los datos.
+    - Extraccion de caracteristicas utilizando un lexicon
+
+    Returns:
+        Pipeline: Un pipeline de scikit-learn listo para preprocesar y vectorizar 
+        datos de texto.
+    """
+    lexicon = load_lexicon(path)
+    
+    # Definición de los pasos del pipeline
+    steps = [
+        # Limpieza de texto utilizando una función personalizada
+        ('clean_text', FunctionTransformer(lambda x: [clean_text(text) for text in x], validate=False)),
+        # Calculo de puntajes de sentimiento
+        ('sentiment_score', FunctionTransformer(lambda x: [[sentiment_score(text, lexicon)] for text in x],
+                                                validate=False)),
+        # Normaliza los resultados
+        ('scaler', MinMaxScaler()),
+    ]
+    
+    # Construcción y retorno del pipeline
+    pipeline = Pipeline(steps)
+    return pipeline
+
 def load_lexicon(path: str) -> dict:
     """
     Carga un lexicon para analisis de sentimientos y devuelve un diccionario
@@ -225,18 +267,22 @@ def load_lexicon(path: str) -> dict:
     Returns:
         dict: Un diccionario con los puntajes positivo/negativo de cada termino
     """
-    sentiwordnet_dict = {}
+    lexicon = {}
     with open(path, 'r', encoding='utf-8') as f:
         for line in f:
+            line = line.strip()
             if not line.startswith('#'):
                 parts = line.split('\t')
                 pos_score = float(parts[2]) # Score positivo
                 neg_score = float(parts[3]) # Score negativo
-                synset_terms = parts[4].split()  # Terminos
+                terms = parts[4].split()
                 
                 # Almacenar la puntuacion de cada termino en el diccionario
-                for term in synset_terms:
-                    sentiwordnet_dict[term] = (pos_score, neg_score)
+                for term in terms:
+                    # Limpiar el termino para eliminar hashtags y números que indican
+                    # posibles significados de la palabra pero por simplicidad se ignoran
+                    term_clean = term.split('#')[0].strip()
+                    lexicon[term_clean] = (pos_score, neg_score)
 
-    return sentiwordnet_dict
+    return lexicon
 
