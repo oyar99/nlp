@@ -92,15 +92,15 @@ Esta estrategia nos permite visualizar cómo los personajes y sus palabras más 
 Exploramos temas como ``amor'', ``guerra'', ``paz'', ``muerte'' y ``honor'' a través del razonamiento analógico, descubriendo lo siguiente:
 
 \begin{itemize}
-    \item \textbf{Amor}: El ``amor'' está asociado con palabras como ``casado'', ``celoso'', ``felicidad'' y ``encanto''. En Tolstói, vemos asociaciones específicas con personajes como ``Sonetchka'', mientras que Joyce se enfoca en aspectos más internos del amor, con términos como ``amante''.
+    \item \textbf{Amor}: El ``amor'' está asociado con palabras como ``casado'', ``celoso'', ``felicidad'' y ``encanto''. En Tolstoy, vemos asociaciones específicas con personajes como ``Sonetchka'', mientras que Joyce se enfoca en aspectos más internos del amor, con términos como ``amante''.
     
-    \item \textbf{Guerra}: En Tolstói, la ``guerra'' está vinculada a contextos históricos y nacionales, con palabras como ``patriótico'' y ``heroísmo''. En Austen, la ``guerra'' se usa más metafóricamente para representar conflictos sociales o personales, como ``sociedad'' y ``asunto''.
+    \item \textbf{Guerra}: En Tolstoy, la ``guerra'' está vinculada a contextos históricos y nacionales, con palabras como ``patriótico'' y ``heroísmo''. En Austen, la ``guerra'' se usa más metafóricamente para representar conflictos sociales o personales, como ``sociedad'' y ``asunto''.
     
-    \item \textbf{Paz}: La ``paz'' en Tolstói está asociada con luchas filosóficas, mientras que en Austen tiene un trasfondo emocional, vinculada a palabras como ``miserable'' y ``confianza''.
+    \item \textbf{Paz}: La ``paz'' en Tolstoy está asociada con luchas filosóficas, mientras que en Austen tiene un trasfondo emocional, vinculada a palabras como ``miserable'' y ``confianza''.
     
-    \item \textbf{Muerte}: La ``muerte'' evoca asociaciones emocionales y espirituales fuertes, con palabras como ``dolor'', ``ángel'' y ``enfermedad''. En Tolstói, está más relacionada con reflexiones morales, mientras que en Austen se centra más en la pérdida personal.
+    \item \textbf{Muerte}: La ``muerte'' evoca asociaciones emocionales y espirituales fuertes, con palabras como ``dolor'', ``ángel'' y ``enfermedad''. En Tolstoy, está más relacionada con reflexiones morales, mientras que en Austen se centra más en la pérdida personal.
     
-    \item \textbf{Honor}: En Austen, el ``honor'' está relacionado con la reputación social y el comportamiento personal, mientras que en Tolstói está ligado al deber y la rivalidad. En Joyce, se asocia con conflictos internos y la identidad.
+    \item \textbf{Honor}: En Austen, el ``honor'' está relacionado con la reputación social y el comportamiento personal, mientras que en Tolstoy está ligado al deber y la rivalidad. En Joyce, se asocia con conflictos internos y la identidad.
 \end{itemize}
 
 A través de estas analogías, logramos comprender mejor cómo cada autor trata estos temas universales de manera única, reflejando la riqueza y profundidad de sus obras literarias.
@@ -120,7 +120,7 @@ Definimos tres arquitecturas FFNN:
     \item \textbf{Modelo 3} (El más complejo): Capa de embedding $\rightarrow$ Capa de flatten $\rightarrow$ Capa densa (512, 256, 128 unidades) $\rightarrow$ Capa de salida.
 \end{itemize}
 
-Entrenamos y evaluamos cada modelo durante 10 épocas con un tamaño de lote de 32. Evaluamos cada combinación de modelo y tamaño de embedding en el conjunto de prueba, midiendo precisión, exactitud y \textit{recall}. El script muestra la arquitectura del modelo y los resultados de rendimiento final para cada configuración.
+Entrenamos y evaluamos cada modelo durante 10 épocas con un tamaño de lote de 32. Evaluamos cada combinación de modelo y tamaño de embedding en el conjunto de prueba, midiendo precisión, exactitud y \textit{recall}. El notebook muestra la arquitectura del modelo y los resultados de rendimiento final para cada configuración.
 
 Al explorar diferentes arquitecturas FFNN y tamaños de embeddings para la atribución de autor, encontramos que los modelos más simples y los embeddings más pequeños tienden a generalizar mejor, siendo el Modelo 1 con embeddings de 50 dimensiones el que ofrece el mejor rendimiento general.
 
