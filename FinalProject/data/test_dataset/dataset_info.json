@@ -1,0 +1,24 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "anchor_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "anchor": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "positive": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "positive_id": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

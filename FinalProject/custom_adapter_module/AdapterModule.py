@@ -30,10 +30,10 @@ class AdapterModule(nn.Module):
         super(AdapterModule, self).__init__()
         
         # Define the first dense layer
-        self.dense1 = nn.Linear(in_features=input_dim, out_features=512, bias=True)
+        self.dense1 = nn.Linear(in_features=input_dim, out_features=768, bias=True)
         
         # Define the second dense layer
-        #self.dense2 = nn.Linear(in_features=512, out_features=512, bias=True)
+        self.dense2 = nn.Linear(in_features=768, out_features=512, bias=True)
         
         # Define the output layer
         self.output = nn.Linear(in_features=512, out_features=output_dim)
@@ -72,7 +72,7 @@ class AdapterModule(nn.Module):
         x = self.dropout(self.activation(self.dense1(x)))
         
         # Pass through the second dense layer, activation function, and dropout
-        #x = self.dropout(self.activation(self.dense2(x)))
+        x = self.dropout(self.activation(self.dense2(x)))
         
         # Pass through the output layer
         x = self.output(x)

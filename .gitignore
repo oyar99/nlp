@@ -166,3 +166,5 @@ raw_data/blogs/
 raw_data/
 bac.parquet
 bac_train.parquet
+
+FinalProject/results/domain_adaptation_model/*
