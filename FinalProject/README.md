@@ -1,0 +1,1 @@
+fine tunned model: https://huggingface.co/raul-delarosa99/bge-small-en-v1.5-RIRAG_ObliQA
