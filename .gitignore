@@ -167,4 +167,4 @@ raw_data/
 bac.parquet
 bac_train.parquet
 
-FinalProject/results/domain_adaptation_model/*.
+FinalProject/results/domain_adaptation_model/*
