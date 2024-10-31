@@ -17,14 +17,6 @@
     "positive_id": {
       "dtype": "string",
       "_type": "Value"
-    },
-    "negative": {
-      "dtype": "string",
-      "_type": "Value"
-    },
-    "negative_2": {
-      "dtype": "string",
-      "_type": "Value"
     }
   },
   "homepage": "",
