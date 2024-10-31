@@ -22,7 +22,7 @@ The model achieved a high accuracy on the validation set and performed well in t
 
 To reproduce the results, follow these steps:
 
-- Use python 3.9
+- Use python 3.10
 
 ```sh
 python --version
