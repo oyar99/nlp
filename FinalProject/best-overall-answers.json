@@ -3,6 +3,7 @@
     "Model": "GPT-4o",
     "CompositeScore": "0.99745",
     "QuestionID": "aee8a4da-9ff0-44d0-967f-5eb9f4f72975",
+    "Question": "What percentage of the Insurer's Net Written Premium is used to determine the non-proportional reinsurance element?",
     "RetrievedPassages": [
       "The non proportional reinsurance element is calculated as 52% of the Insurer's Net Written Premium."
     ],
@@ -12,6 +13,7 @@
     "Model": "GPT-4o",
     "CompositeScore": "0.99446",
     "QuestionID": "34015b3e-d19f-4fc3-b68f-d50c679fd0bf",
+    "Question": "Who is responsible for ensuring compliance with the obligations that apply to the Reporting Entity of a Fund under the provisions of this chapter, unless explicitly stated otherwise?",
     "RetrievedPassages": [
       "Where an obligation applies to a Reporting Entity of a Fund under a provision of this chapter, except where expressly provided otherwise, the Governing Body of the Listed Fund must ensure compliance with that obligation."
     ],
@@ -21,6 +23,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.9943",
     "QuestionID": "90838ba0-8ae7-4f82-8f9b-e93023209801",
+    "Question": "As per the regulations, what must be disclosed in the periodic statement about the Remuneration received by the Authorised Person or its Associates from third parties in relation to the management of a discretionary portfolio?",
     "RetrievedPassages": [
       "Additional Information:  Discretionary Investment Management Activities\nIn addition to Rule \u200e13.1.1, where an Authorised Person acts as an Investment Manager on a discretionary basis, the periodic statement must also include the following additional information:\n(a)\ta statement of which Investments, if any, were at the closing date loaned to any third party and which Investments, if any, were at that date charged to secure borrowings made on behalf of the portfolio;\n(b)\tthe aggregate of any interest payments made and income received during the account period in respect of loans or borrowings made during that period;\n(c)\tdetails of each Transaction which has been entered into for the portfolio during the period;\n(d)\tthe aggregate of Money and details of all Investments transferred into and out of the portfolio during the period;\n(e)\tthe aggregate of any interest payments, including the dates of their application and dividends or other benefits received by the Authorised Person for the portfolio during that period;\n(f)\ta statement of the aggregate Fees and charges of the Authorised Person and its Associates; and\n(g)\ta statement of the amount of any Remuneration received by the Authorised Person or its Associates or both from a third party."
     ],
@@ -30,6 +33,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.98952",
     "QuestionID": "9ebb2ddc-cf35-4ae9-b4bb-dd1786076578",
+    "Question": "If a Recognised Investment Exchange is part of a group that includes another investment exchange that is subject to position reporting requirements in a different jurisdiction, under what condition can the Recognised Investment Exchange satisfy its position reporting obligations under Rules 3.3.12 to 3.3.15 by submitting reports that comply with the other jurisdiction's requirements?",
     "RetrievedPassages": [
       "Where a Recognised Investment Exchange is part of the same Group as another investment exchange and the Regulator determines that that investment exchange complies with legally binding requirements regarding position reporting in another jurisdiction which are broadly equivalent to the requirements set out in Rules 3.3.12 to 3.3.15, the Recognised Investment Exchange may submit position reporting complying with the requirements of the other jurisdiction for purposes of complying with its obligations under Rules 3.3.12 to 3.3.15.",
       "Position Reports. For the weekly report referred to under Rule 3.3.12, the Recognised Investment Exchange must:\n(a)\tcategorise persons in accordance with Rule 3.3.15; and\n(b)\tdifferentiate, to the extent possible, between positions identified as:\n(i)\tpositions which in an objectively measurable way reduce risks directly relating to commercial activities; and\n(ii)\tother positions."
@@ -40,6 +44,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.98873",
     "QuestionID": "114451ff-194e-4395-b1b5-e1a62820f759",
+    "Question": "What is the breakdown of the total US$20,000 authorization fee required for an entity looking to be authorized by the FSRA to provide custody services and engage in DSF related activities?",
     "RetrievedPassages": [
       "FEES\nAuthorisation fees\nFor entities seeking to be authorised for Providing Custody (and by extension as a DSF):  For these entities, the authorisation fee will be US$20,000, comprising a fee of US$5,000 for Providing Custody and a US$15,000 supplementary fee in accordance with FEES Rule 1.2.6, reflective of the regulatory burden imposed on FSRA to ensure compliance with the applicable Rules and requirements for conducting DSF related activities.\n"
     ],
@@ -49,6 +54,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.98852",
     "QuestionID": "25feb735-4adf-4fa8-a173-d3564fb80083",
+    "Question": "Is it mandatory for an insurer to conduct an actuarial valuation of liabilities on the Solvency Reference Date if it falls on a date different from their annual reporting date?",
     "RetrievedPassages": [
       "Rule \u200e5.6.6 does not require an Insurer to obtain a valuation by an Actuary of the liability referred to in that Rule, at a Solvency Reference Date other than the Insurer's annual reporting date.",
       "Rules \u200e5.4.10 and \u200e5.4.11 do not require an Insurer to obtain a valuation by an Actuary of the assets and liabilities referred to in those Rules, at a Solvency Reference Date other than the Insurer's annual reporting date."
@@ -59,6 +65,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.94497",
     "QuestionID": "5b88ec60-8efb-4525-a1ca-3cf883191f89",
+    "Question": "What role does the Board play in establishing the risk appetite for the Reporting Entity as it strives to meet its strategic objectives?",
     "RetrievedPassages": [
       "General. The Board should set the Reporting Entity's business and strategic objectives and risk parameters, ensure that the necessary financial and human resources are in place for the Reporting Entity to meet those objectives, and review management performance in achieving those objectives and outcomes. For this purpose, the Board should:\na.\tdetermine the nature and extent of the significant risks it is willing to take in achieving the relevant strategic objectives; and\nb.\tset the Reporting Entity's values and standards and ensure that its obligations to its stakeholders are clearly understood and met.",
       "General. The role of the Board is to provide leadership of the Reporting Entity within a framework of prudent and effective controls which enable risks to which the Reporting Entity is exposed to be identified, assessed and effectively managed.",
@@ -71,6 +78,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.94432",
     "QuestionID": "72340ff0-299b-49f9-aab5-87c81530aaca",
+    "Question": "When assessing a matter's eligibility for review according to subsection \u200e(2)\u200e(c), which section contains the necessary provisions to establish whether it is open for review?",
     "RetrievedPassages": [
       "For the purposes of subsection \u200e(2)\u200e(c), whether a matter is open to review is to be determined in accordance with section \u200e252\u200e(7).\n\n",
       "For the purposes of subsection \u200e(2)\u200e(c), whether a matter is open to review is to be determined in accordance with section \u200e252\u200e(7).",
@@ -82,6 +90,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.93851",
     "QuestionID": "497d8e88-e33c-48a1-820d-9583f5c9dd35",
+    "Question": "If an individual is brought before the Court for behavior that may fall under paragraph (a) or (b) of subsection (1), on what grounds could the Court decide not to issue an order under subsection (4)?",
     "RetrievedPassages": [
       "But the Court may not make an order under subsection \u200e(4) if it is satisfied that\u2014\n(a)\tthe Person Concerned believed, on reasonable grounds, that his Behaviour did not fall within paragraph \u200e(a) or \u200e(b) of subsection \u200e(1); or\n(b)\the took all reasonable precautions and exercised all due diligence to avoid behaving in a way which fell within paragraph \u200e(a) or \u200e(b) of subsection \u200e(1).",
       "A person does not contravene subsection \u200e(1) if\u2014\n(a)\the believed, on reasonable grounds, that his Behaviour did not fall within paragraph \u200e(a) or \u200e(b) of that subsection; or\n(b)\the took all reasonable precautions and exercised all due diligence to avoid behaving in a way which fell within paragraph \u200e(a) or \u200e(b) of that subsection.\n"
@@ -92,6 +101,7 @@
     "Model": "GPT-3.5",
     "CompositeScore": "0.93631",
     "QuestionID": "280d53b3-e089-49cd-8565-c93bf70ae5ee",
+    "Question": "How does the FSRA monitor and enforce compliance with international tax reporting obligations, particularly for transactions involving virtual assets and digital securities?",
     "RetrievedPassages": [
       "DIGITAL SECURITIES \u2013 SPECIFIC REGULATORY CONSIDERATIONS\nInternational Tax Reporting Obligations\nAll entities seeking to engage in Digital Securities-based financial services activities must consider and, if applicable, adhere to their tax reporting obligations including, as applicable, under the Foreign Account Tax Compliance Act (\u201cFATCA\u201d) and the ADGM Common Reporting Standard Regulations 2017.\n\n",
       "REGULATORY REQUIREMENTS FOR AUTHORISED PERSONS ENGAGED IN REGULATED ACTIVITIES IN RELATION TO VIRTUAL ASSETS\nInternational Tax Reporting Obligations\nCOBS Rule 17.4 requires Authorised Persons to consider and, if applicable, adhere to their tax reporting obligations including, as applicable, under the Foreign Account Tax Compliance Act (\u201cFATCA\u201d) and the ADGM Common Reporting Standard Regulations 2017.\n"
